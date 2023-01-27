@@ -6,8 +6,6 @@ To start, run these commands:
 
 `npm install`
 
-WIP ---\/
-
 ### Evaluation Grid
 
 <table>

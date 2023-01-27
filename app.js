@@ -3,8 +3,11 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+
+require('dotenv').config();
+
 const PORT = process.env.SRV_PORT || 3000;
-const mongoUrl = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:${process.env.MONGO_PORT}/cqi_db`;
+const mongoUrl = `mongodb://root:Mg8jvU2gKfrq1QRYKwwQ@3.19.127.27:27017`;
 
 
 //TODO: @Mohamed Bedair, add your routers here
@@ -39,6 +42,7 @@ app.use('/objects', objectsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
+  console.log(mongoUrl);
 });
 
 // catch 404 and forward to error handler

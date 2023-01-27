@@ -3,6 +3,7 @@ const router = express.Router();
 require('dotenv').config();
 
 const User = require('../models/user');
+const Task = require('../models/task');
 const {HttpStatusCode} = require("axios");
 
 //const mongoose = require('mongoose');
@@ -13,7 +14,6 @@ router.get('/', (req, res) => {
         if (err) return res.status(500).send(err);
         res.status(200).json(users);
     });
-    //res.status(HttpStatusCode.Ok).json({"Nice":"cock"});
 });
 
 // Get a single user
@@ -49,6 +49,64 @@ router.delete('/:id', (req, res) => {
         if (err) return res.status(500).json({error: err});
         if (!user) return res.status(404).json({error: 'User not found'});
         res.status(HttpStatusCode.Gone)
+    });
+});
+
+router.get('/users/:id/tasks', (req, res) => {
+    // Get the user ID from the URL
+    const userId = req.params.id;
+
+    // Retrieve the tasks for the user from the database
+    Task.find({userId: userId}, (err, tasks) => {
+        if (err) return res.status(500).json({message: 'Error retrieving tasks for user'});
+        res.status(200).json(tasks);
+    });
+})
+
+router.post('/users/:id/tasks', (req, res) => {
+    // Get the user ID from the URL
+    const userId = req.params.id;
+
+    // Create a new task object with the user ID and task details from the request body
+    const task = new Task({
+        userId: userId,
+        name: req.body.name,
+        description: req.body.description,
+        date: req.body.date,
+        startTime: req.body.startTime,
+        endTime: req.body.endTime
+    });
+
+    // Save the task to the database
+    task.save((err) => {
+        if (err) return res.status(500).json({message: 'Error creating task for user'});
+        res.status(201).json({message: 'Task created successfully'});
+    });
+});
+
+router.put('/users/:id/tasks/:taskId', (req, res) => {
+    // Get the user ID and task ID from the URL
+    const userId = req.params.id;
+    const taskId = req.params.taskId;
+
+    // Find the task by user ID and task ID and update it with the details from the request body
+    Task.findOneAndUpdate({userId: userId, _id: taskId}, req.body, {new: true}, (err, task) => {
+        if (err) return res.status(500).json({message: 'Error updating task for user'});
+        if (!task) return res.status(404).json({message: 'Task not found for user'});
+        res.status(200).json({message: 'Task updated successfully'});
+    });
+});
+
+router.delete('/users/:id/tasks/:taskId', (req, res) => {
+    // Get the user ID and task ID from the URL
+    const userId = req.params.id;
+    const taskId = req.params.taskId;
+
+    // Find the task by user ID and task ID and delete it from the database
+    Task.findOneAndDelete({userId: userId, _id: taskId}, (err, task) => {
+        if (err) return res.status(500).json({message: 'Error deleting task for user'});
+        if (!task) return res.status(404).json({message: 'Task not found for user'});
+        res.status(200).json({message: 'Task deleted successfully'});
     });
 });
 

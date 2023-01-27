@@ -1,12 +1,31 @@
 POST http://localhost:3000/users
 Content-Type: application/json
 
+
 {
-  "id": "user1",
-  "password": "password123",
+  "id": "3",
+  "password": "i love rj",
   "type": "Organizer",
-  "firstname": "John",
-  "lastname": "Doe",
-  "age": 30,
-  "address": "123 Main St"
+  "firstname": "Victoria",
+  "lastname": "Emma",
+  "age": 22,
+  "address": "2350 Hogan",
+  "tasks": [
+    {
+      "name": "Task 5",
+      "description": "Study Neuro",
+      "date": "2022-01-03",
+      "startTime": "14:00",
+      "endTime": "15:00",
+      "userId": "3"
+    },
+    {
+      "name": "Task 6",
+      "description": "Study Cardio",
+      "date": "2022-01-04",
+      "startTime": "16:00",
+      "endTime": "17:00",
+      "userId": "3"
+    }
+  ]
 }

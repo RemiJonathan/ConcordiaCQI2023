@@ -8,18 +8,25 @@
   "dependencies": {
     "axios": "^1.2.5",
     "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "http-errors": "~1.6.3",
     "mongoose": "^6.9.0",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
   "description": "This is a project designed in the context of the 2023 Quebec Engineering Competition for Concordia University. This is use initializing the seed with the MEVN framework in order to create a web app to answer the competition challenge.",
   "main": "app.js",
-  "devDependencies": {},
-  "authors": ["Remi Jonathan Choquette", "Khaled Matloub", "Mohamed Bedair", "Seif Bedair"],
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RemiJonathan/ConcordiaCQI2023.git"
+  },
+  "author": "Remi Jonathan Choquette, Khaled Matloub, Mohamed Bedair, Seif Bedair",
+  "bugs": {
+    "url": "https://github.com/RemiJonathan/ConcordiaCQI2023/issues"
+  },
+  "homepage": "https://github.com/RemiJonathan/ConcordiaCQI2023#readme"
 }

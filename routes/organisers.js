@@ -4,34 +4,34 @@ require('dotenv').config();
 
 //const mongoose = require('mongoose');
 
-// Get all users
+// Get all organisers
 router.get('/', (req, res) => {
-    // Code to get all users from the database
-    res.json(users);
+    // Code to get all organisers from the database
+    res.json(organisers);
 });
 
-// Get a single user
+// Get a single organiser
 router.get('/:id', (req, res) => {
-    // Code to get a single user from the database
-    res.json(user);
+    // Code to get a single organiser from the database
+    res.json(organiser);
 });
 
-// Create a new user
+// Create a new organiser
 router.post('/', (req, res) => {
-    // Code to create a new user in the database
-    res.json({message: 'User created successfully'});
+    // Code to create a new organiser in the database
+    res.json({message: 'Organiser created successfully'});
 });
 
-// Update a user
+// Update a organiser
 router.put('/:id', (req, res) => {
-    // Code to update a user in the database
-    res.json({message: 'User updated successfully'});
+    // Code to update a organiser in the database
+    res.json({message: 'Organiser updated successfully'});
 });
 
-// Delete a user
+// Delete a organiser
 router.delete('/:id', (req, res) => {
-    // Code to delete a user from the database
-    res.json({message: 'User deleted successfully'});
+    // Code to delete a organiser from the database
+    res.json({message: 'Organiser deleted successfully'});
 });
 
 

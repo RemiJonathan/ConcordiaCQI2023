@@ -1,10 +1,20 @@
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
-const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:${process.env.MONGO_PORT}`;
+
+const url = `mongodb://root:Mg8jvU2gKfrq1QRYKwwQ@3.19.127.27:27017/`;
 const client = new MongoClient(url, {useNewUrlParser: true});
+/*
+List of functions:
+    createUser(id, password, type, firstName, lastName, age, address)
+    createLostItem(name, description, lostHour, reporter)
+    createFoundItem(name, description, findHour)
+    createIssue(name, description, assistanceType)
+
+ */
+
 
 function createUser(id, password, type, firstName, lastName, age, address) {
-    client.connect(err => {
+    client.connect(() => {
         const db = client.db('cqi_db');
         const collection = db.collection('users');
         collection.insertOne({
@@ -16,14 +26,14 @@ function createUser(id, password, type, firstName, lastName, age, address) {
             age: age,
             address: address,
             tasks: []
-        }, (err, res) => {
+        }, () => {
             console.log('item added to the database');
             client.close();
         });
     });
 }
 function createLostItem(name, description, lostHour, reporter) {
-    client.connect(err => {
+    client.connect(() => {
         const db = client.db('cqi_db');
         const collection = db.collection('objects');
         collection.insertOne({
@@ -32,7 +42,7 @@ function createLostItem(name, description, lostHour, reporter) {
             lost_hour: lostHour,
             reporter: reporter,
             type: 'lost'
-        }, (err, res) => {
+        }, () => {
             console.log('item added to the database');
             client.close();
         });
@@ -40,7 +50,7 @@ function createLostItem(name, description, lostHour, reporter) {
 }
 
 function createFoundItem(name, description, findHour) {
-    client.connect(err => {
+    client.connect(() => {
         const db = client.db('cqi_db');
         const collection = db.collection('objects');
         collection.insertOne({
@@ -48,25 +58,84 @@ function createFoundItem(name, description, findHour) {
             description: description,
             find_hour: findHour,
             type: 'found'
-        }, (err, res) => {
+        }, () => {
             console.log('item added to the database');
             client.close();
         });
     });
 }
 
-function createIssues(name, description, assistanceType) {
-    client.connect(err => {
+function createIssue(name, description, assistanceType) {
+    client.connect(() => {
         const db = client.db('cqi_db');
-        const collection = db.collection('objects');
+        const collection = db.collection('reports');
         collection.insertOne({
             name: name,
             description: description,
-            find_hour: findHour,
-            type: 'found'
-        }, (err, res) => {
+            assistance_type: assistanceType,
+        }, () => {
             console.log('item added to the database');
             client.close();
         });
     });
 }
+function createTask(name, description, date, startTime, endTime) {
+    client.connect(() => {
+        const db = client.db('cqi_db');
+        const collection = db.collection('tasks');
+        collection.insertOne({
+            name: name,
+            description: description,
+            date: date,
+            start_time: startTime,
+            end_time: endTime,
+            volunteers: []
+        }, () => {
+            console.log('item added to the database');
+            client.close();
+        });
+    });
+}
+function addVolunteer(task, username) {
+    client.connect(() => {
+        const db = client.db('cqi_db');
+        const collection = db.collection('objects');
+        collection.updateOne({name: task}, {$push: {volunteers: username}}, function (err, res) {
+            if (err) throw err;
+            console.log("Item added to the array");
+            client.close();
+        });
+    });
+}
+
+function getIDs() {
+    let arr = [];
+    client.connect(() => {
+        const db = client.db('cqi_db');
+        const collection = db.collection('users');
+        collection.distinct('id', (err, ids) => {
+            arr.push(ids.toString());
+        });
+    });
+    return arr;
+}
+
+function getName(id){
+
+    client.connect(() => {
+        const db = client.db('cqi_db');
+        const collection = db.collection('users');
+        collection.findOne({ id: id }, (err,item) => {
+            console.log(JSON.stringify(item));
+            client.close();
+
+        });
+    });
+}
+
+//createTask("Finish Task","Finish all the tasks required", "27/1/2023","8:00", "20:00");
+//addVolunteer("Finish Task", "kmatloub");
+//createIssue("Khaled", "He wants to sleep", "VOLUNTEER");
+//console.log(getIDs());
+console.log(getName("kmatloub"));
+

@@ -10,8 +10,8 @@ const usersRouter = require('./routes/users');
 const volunteersRouter = require('./routes/volunteers');
 const organisersRouter = require('./routes/organisers');
 const tasksRouter = require('./routes/tasks');
-const issuesRouter = require('./routes/issues');
-const itemsRouter = require('./routes/items');
+const reportsRouter = require('./routes/reports');
+const objectsRouter = require('./routes/objects');
 
 const app = express();
 
@@ -31,8 +31,8 @@ app.use('/users', usersRouter);
 app.use('/volunteers', volunteersRouter);
 app.use('/organisers', organisersRouter);
 app.use('/tasks', tasksRouter);
-app.use('/issues', issuesRouter);
-app.use('/items', itemsRouter);
+app.use('/reports', reportsRouter);
+app.use('/objects', objectsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

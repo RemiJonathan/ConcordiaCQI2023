@@ -3,6 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const PORT = process.env.SRV_PORT || 3000;
+const mongoUrl = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:${process.env.MONGO_PORT}/cqi_db`;
+
 
 //TODO: @Mohamed Bedair, add your routers here
 const indexRouter = require('./routes/index');
@@ -34,10 +37,15 @@ app.use('/tasks', tasksRouter);
 app.use('/reports', reportsRouter);
 app.use('/objects', objectsRouter);
 
+app.listen(PORT, () => {
+  console.log(`Server is running on PORT ${PORT}`);
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function (err, req, res, next) {

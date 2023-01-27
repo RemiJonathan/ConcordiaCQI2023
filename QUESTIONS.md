@@ -2,12 +2,11 @@
 
 1. What does consult entail in lost & found?
 
-   ###### Answer
+   ###### Basically only make the list of Found items accessible to the organizers.
 
-2. Q2
+2. Who submits issues?
 
-   ###### Answer
-
+   ###### As an added feature we will have a public form for emergencies open to the public, but generally only inform those involved/needed in the issue.
 3. Q3
 
    ###### Answer

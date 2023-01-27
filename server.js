@@ -54,3 +54,19 @@ function createFoundItem(name, description, findHour) {
         });
     });
 }
+
+function createIssues(name, description, assistanceType) {
+    client.connect(err => {
+        const db = client.db('cqi_db');
+        const collection = db.collection('objects');
+        collection.insertOne({
+            name: name,
+            description: description,
+            find_hour: findHour,
+            type: 'found'
+        }, (err, res) => {
+            console.log('item added to the database');
+            client.close();
+        });
+    });
+}

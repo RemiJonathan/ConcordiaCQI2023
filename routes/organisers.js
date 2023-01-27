@@ -22,15 +22,15 @@ router.post('/', (req, res) => {
     res.json({message: 'Organiser created successfully'});
 });
 
-// Update a organiser
+// Update an organiser
 router.put('/:id', (req, res) => {
-    // Code to update a organiser in the database
+    // Code to update an organiser in the database
     res.json({message: 'Organiser updated successfully'});
 });
 
-// Delete a organiser
+// Delete an organiser
 router.delete('/:id', (req, res) => {
-    // Code to delete a organiser from the database
+    // Code to delete an organiser from the database
     res.json({message: 'Organiser deleted successfully'});
 });
 

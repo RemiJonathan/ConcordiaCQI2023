@@ -7,6 +7,11 @@ const logger = require('morgan');
 //TODO: @Mohamed Bedair, add your routers here
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const volunteersRouter = require('./routes/volunteers');
+const organisersRouter = require('./routes/organisers');
+const tasksRouter = require('./routes/tasks');
+const issuesRouter = require('./routes/issues');
+const itemsRouter = require('./routes/items');
 
 const app = express();
 
@@ -23,6 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //TODO: @Mohamed Bedair, add all routes here
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/volunteers', volunteersRouter);
+app.use('/organisers', organisersRouter);
+app.use('/tasks', tasksRouter);
+app.use('/issues', issuesRouter);
+app.use('/items', itemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

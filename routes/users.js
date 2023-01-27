@@ -22,15 +22,15 @@ router.post('/', (req, res) => {
     res.json({message: 'User created successfully'});
 });
 
-// Update an user
+// Update a user
 router.put('/:id', (req, res) => {
-    // Code to update an user in the database
+    // Code to update a user in the database
     res.json({message: 'User updated successfully'});
 });
 
-// Delete an user
+// Delete a user
 router.delete('/:id', (req, res) => {
-    // Code to delete an user from the database
+    // Code to delete a user from the database
     res.json({message: 'User deleted successfully'});
 });
 

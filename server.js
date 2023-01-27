@@ -22,3 +22,35 @@ function createUser(id, password, type, firstName, lastName, age, address) {
         });
     });
 }
+function createLostItem(name, description, lostHour, reporter) {
+    client.connect(err => {
+        const db = client.db('cqi_db');
+        const collection = db.collection('objects');
+        collection.insertOne({
+            name: name,
+            description: description,
+            lost_hour: lostHour,
+            reporter: reporter,
+            type: 'lost'
+        }, (err, res) => {
+            console.log('item added to the database');
+            client.close();
+        });
+    });
+}
+
+function createFoundItem(name, description, findHour) {
+    client.connect(err => {
+        const db = client.db('cqi_db');
+        const collection = db.collection('objects');
+        collection.insertOne({
+            name: name,
+            description: description,
+            find_hour: findHour,
+            type: 'found'
+        }, (err, res) => {
+            console.log('item added to the database');
+            client.close();
+        });
+    });
+}

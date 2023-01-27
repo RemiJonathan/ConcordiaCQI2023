@@ -1,6 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://root:Mg8jvU2gKfrq1QRYKwwQ@3.19.127.27:27017/';
-const client = new MongoClient(url, { useNewUrlParser: true });
+require('dotenv').config();
+const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:${process.env.MONGO_PORT}`;
+const client = new MongoClient(url, {useNewUrlParser: true});
 
 function createUser(id, password, type, firstName, lastName, age, address) {
     client.connect(err => {
@@ -21,4 +22,3 @@ function createUser(id, password, type, firstName, lastName, age, address) {
         });
     });
 }
-createUser('kmatloub','k1234','ORGANIZER', 'Khaled', 'Matloub', 21, 'Concordia',);

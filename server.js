@@ -12,7 +12,8 @@ List of functions:
 
  */
 
-
+let users;
+let status = false;
 function createUser(id, password, type, firstName, lastName, age, address) {
     client.connect(() => {
         const db = client.db('cqi_db');
@@ -126,16 +127,24 @@ function getName(id){
         const db = client.db('cqi_db');
         const collection = db.collection('users');
         collection.findOne({ id: id }, (err,item) => {
-            console.log(JSON.stringify(item));
+            console.log(item);
             client.close();
-
         });
     });
 }
+async function getUsers(){
+    await client.connect()
+        const db = client.db('cqi_db');
+        const collection = db.collection('users');
 
+    return await collection.find({}).toArray();
+        //client.close();
+
+}
 //createTask("Finish Task","Finish all the tasks required", "27/1/2023","8:00", "20:00");
 //addVolunteer("Finish Task", "kmatloub");
 //createIssue("Khaled", "He wants to sleep", "VOLUNTEER");
 //console.log(getIDs());
-console.log(getName("kmatloub"));
+let item = getUsers().then();
+console.log(item);
 

@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
         if (err) return res.status(500).send(err);
         res.status(200).json(users);
     });
+    //res.status(HttpStatusCode.Ok).json({"Nice":"cock"});
 });
 
 // Get a single user
@@ -28,7 +29,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const newUser = new User(req.body);
     newUser.save((err, savedUser) => {
-        if (err) return res.status(500).send(err);
+        if (err) return res.status(HttpStatusCode.InternalServerError).send(err);
         res.status(201).json(savedUser);
     });
 });
@@ -36,8 +37,8 @@ router.post('/', (req, res) => {
 // Update a user
 router.put('/:id', (req, res) => {
     User.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedUser) => {
-        if (err) return res.status(500).send(err);
-        if (!updatedUser) return res.status(404).send('User not found');
+        if (err) return res.status(HttpStatusCode.InternalServerError).send(err);
+        if (!updatedUser) return res.status(HttpStatusCode.NotFound).send('User not found');
         res.status(200).json(updatedUser);
     });
 });
